@@ -1,0 +1,44 @@
+using System;
+using System.Diagnostics;
+
+namespace Task 6
+{
+    class Program
+    {
+        static long CalcTime(string a, string b)
+        {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            for (int i = 0; i < 100000000; i++)
+            {
+                if (a == b)
+                {
+                }
+            }
+            stopwatch.Stop();
+
+            return stopwatch.ElapsedMilliseconds;
+        }
+
+        static string GetString()
+        {
+            return "qwertyuiopasdfghjklzxcvbnm1234567890" + 1;
+        }
+
+        static void Main(string[] args)
+        {
+            string a = string.Intern(GetString());
+            string b = string.Intern(GetString());
+
+            string c = GetString();
+            string d = GetString();
+
+            long time1 = CalcTime(a, b);
+            long time2 = CalcTime(c, d);
+
+            Console.WriteLine(time1);
+            Console.WriteLine(time2);
+        }
+    }
+}
