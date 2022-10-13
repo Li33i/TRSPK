@@ -1,0 +1,36 @@
+using System;
+using System.Text;
+using System.Diagnostics;
+
+namespace Task5
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            string s = "";
+            for (int i = 0; i < 50000; i++)
+            {
+                s += "сентябрь октябрь ноябрь";
+            }
+
+            stopwatch.Stop();
+            Console.WriteLine($"Время конкатенации String = {stopwatch.ElapsedMilliseconds}");
+
+            StringBuilder builder = new StringBuilder();
+            stopwatch.Reset();
+            stopwatch.Start();
+            for (int i = 0; i < 50000; i++)
+            {
+                builder.Append("сентябрь октябрь ноябрь");
+            }
+            stopwatch.Stop();
+
+            Console.WriteLine($"Время конкатенации StringBuilder = {stopwatch.ElapsedMilliseconds}");
+
+        }
+    }
+}
