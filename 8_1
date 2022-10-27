@@ -1,0 +1,69 @@
+using System;
+using System.Collections.Generic;
+using System.Collections;
+using System.Diagnostics;
+
+namespace Lab8
+{
+    class Program
+    {
+        static long CalcTime<T>(IList list, Action<IList, T> action, T item)
+        {
+            int countOperations = 1000000;
+
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            for (int i = 0; i < countOperations; i++)
+            {
+                action(list, item);
+            }
+            stopwatch.Stop();
+
+            return stopwatch.ElapsedMilliseconds;
+        }
+
+        static void Insert<T>(IList collection, T item)
+        {
+            collection.Add(item);
+        }
+
+        static void GetElement<T>(IList collection, T item)
+        {
+            collection.IndexOf(item);
+        }
+
+        static void Main(string[] args)
+        {
+            ArrayList list1 = new ArrayList();
+            long t1 = CalcTime(list1, Insert, 10);
+
+            List<int> l1 = new List<int>();
+            long t2 = CalcTime(l1, Insert, 20);
+
+            ArrayList list2 = new ArrayList();
+            long t3 = CalcTime(list1, Insert, "aaa");
+
+            List<string> l2 = new List<string>();
+            long t4 = CalcTime(l2, Insert, "aaa");
+
+            Console.WriteLine("Операция вставки");
+            Console.WriteLine("ArrayList string => время: " + t3);
+            Console.WriteLine("ArrayList int => время: " + t1);
+            Console.WriteLine("List string => время: " + t4);
+            Console.WriteLine("List int => время: " + t2);
+
+            long t5 = CalcTime(list1, GetElement, 10);
+            long t6 = CalcTime(list2, GetElement, "aaa");
+            long t7 = CalcTime(l1, GetElement, 20);
+            long t8 = CalcTime(l2, GetElement, "aaa");
+
+            Console.WriteLine("Операция получения элемента");
+            Console.WriteLine("ArrayList string => время: " + t6);
+            Console.WriteLine("ArrayList int => время: " + t5);
+            Console.WriteLine("List string => время: " + t8);
+            Console.WriteLine("List int => время: " + t7);
+
+        }
+    }
+}
