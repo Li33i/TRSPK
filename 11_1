@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Text;
+using Task3_1;
+
+namespace Task3_1
+{
+    public class FirstClass
+    {
+        [Name("Первое свойство")]
+        public int First { get; set; }
+        [Name("Второе свойство")]
+        public int Second { get; set; }
+        [Name("Третье свойство")]
+        public int Three { get; set; }
+        [Name("Четвертое свойство")]
+        public int Four { get; set; }
+        [Name("Пятое свойство")]
+        public int Five { get; set; }
+        [Name("Шестое свойство")]
+        public int Six { get; set; }
+        [Name("Седьмое свойство")]
+        public int Seven { get; set; }
+        [Name("Восьмое свойство")]
+        public int Eight { get; set; }
+        [Name("Девятое свойство")]
+        public int Nine { get; set; }
+        [Name("Десятое свойство")]
+        public int Ten { get; set; }
+
+
+    }
+    public class NameAttribute : Attribute
+{
+    public string Description { get; }
+
+    public NameAttribute(string description)
+    {
+        Description = description;
+    }
+}
+}    class Program
+{
+    static void Main(string[] args)
+    {
+        Type type = typeof(FirstClass);
+        PropertyInfo[] infos = type.GetProperties();
+        foreach (var item in infos)
+        {
+            NameAttribute attribute = item.GetCustomAttribute<NameAttribute>();
+            Console.WriteLine(item.Name + " - " + attribute.Description);
+        }
+    }
+}
