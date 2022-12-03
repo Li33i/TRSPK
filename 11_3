@@ -1,0 +1,18 @@
+using System;
+
+namespace Task3
+{
+    enum MyDayWeek { пн, вт, ср, чт, пт, суб, воскр }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Введите день недели");
+            int d = int.Parse(Console.ReadLine());
+
+            var values = Enum.GetValues(typeof(MyDayWeek));
+            Console.WriteLine(values.GetValue(d-1));
+        }
+    }
+}
