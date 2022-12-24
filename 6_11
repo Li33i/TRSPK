@@ -1,0 +1,46 @@
+using System;
+using System.Diagnostics;
+using System.Threading;
+
+namespace Task6_1
+{
+    class Program
+    {
+        static void Work1()
+        {
+        }
+
+        static void Work2(object obj)
+        {
+        }
+
+        static void Main(string[] args)
+        {
+            Stopwatch stopwatch = new Stopwatch();
+
+            for (int i = 1; i <= 10; i++)
+            {
+                stopwatch.Start();
+
+                for (int j = 0; j < i; j++)
+                {
+                    Thread thread = new Thread(Work1);
+                    thread.Start();
+                }
+
+                long t1 = stopwatch.ElapsedTicks;
+                stopwatch.Reset();
+
+                stopwatch.Start();
+                for (int j = 0; j < i; j++)
+                {
+                    ThreadPool.QueueUserWorkItem(Work2);
+                }
+                long t2 = stopwatch.ElapsedTicks;
+                stopwatch.Reset();
+
+                Console.WriteLine($"{i} - {t1} - {t2}");
+            }
+        }
+    }
+}
